@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل حضور كورس C# OOP</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    body {font-family: Tahoma; direction: rtl; margin: 20px;}
+    label {display: block; margin-top: 10px;}
+    input, select {padding: 5px; width: 300px;}
+    button {margin-top: 15px; padding: 10px 20px;}
+    #registerForm, #attendanceForm {display:none; margin-top:20px;}
+    #message {margin-top:20px; font-weight:bold;}
+    .success {color: green;}
+    .error {color: red;}
+    .info {color: blue;}
+    table {border-collapse: collapse; margin-top: 20px;}
+    th, td {border: 1px solid #333; padding: 5px;}
+  </style>
+</head>
+<body>
+
+  <h2>تسجيل حضور كورس C# OOP</h2>
+  <label>الرقم القومي: <input type="text" id="nidInput" required></label>
+  <button onclick="checkNID()">بحث</button>
+
+  <div id="message"></div>
+
+  <!-- فورم التسجيل -->
+  <form id="registerForm">
+    <label>المحافظة:
+      <select id="governorate" required>
+        <option value="أسيوط">أسيوط</option>
+        <option value="القاهرة">القاهرة</option>
+        <option value="الجيزة">الجيزة</option>
+        <option value="الإسكندرية">الإسكندرية</option>
+        <option value="سوهاج">سوهاج</option>
+        <option value="قنا">قنا</option>
+        <option value="المنيا">المنيا</option>
+        <option value="بني سويف">بني سويف</option>
+        <option value="أسوان">أسوان</option>
+        <option value="مطروح">مطروح</option>
+        <option value="البحر الأحمر">البحر الأحمر</option>
+        <option value="الوادي الجديد">الوادي الجديد</option>
+        <option value="دمياط">دمياط</option>
+        <option value="بورسعيد">بورسعيد</option>
+        <option value="الإسماعيلية">الإسماعيلية</option>
+        <option value="السويس">السويس</option>
+        <option value="الشرقية">الشرقية</option>
+        <option value="الغربية">الغربية</option>
+        <option value="الدقهلية">الدقهلية</option>
+        <option value="كفر الشيخ">كفر الشيخ</option>
+        <option value="الفيوم">الفيوم</option>
+        <option value="شمال سيناء">شمال سيناء</option>
+        <option value="جنوب سيناء">جنوب سيناء</option>
+      </select>
+    </label>
+
+    <label>الإدارة:
+      <select id="administration" required>
+        <option>ابنوب</option>
+        <option>ابوتيج</option>
+        <option>اسيوط</option>
+        <option>البداري</option>
+        <option>الغنايم</option>
+        <option>الفتح</option>
+        <option>القوصية</option>
+        <option>ديروط</option>
+        <option>ساحل سليم</option>
+        <option>صدفا</option>
+        <option>منفلوط</option>
+        <option>ديوان المديرية</option>
+        <option>خارج المحافظة</option>
+      </select>
+    </label>
+
+    <label>جهة العمل / المدرسة: <input type="text" id="school" required></label>
+    <label>الاسم رباعي: <input type="text" id="name" required></label>
+    <label>كود المعلم / الطالب: <input type="text" id="code" required></label>
+    <label>الرقم القومي: <input type="text" id="nidInputForm" required></label>
+    <label>البريد الموحد: <input type="email" id="email" required></label>
+    <label>الهاتف: <input type="text" id="phone" required></label>
+    <label>الواتس آب: <input type="text" id="whatsapp"></label>
+    <label>الوظيفة: <input type="text" id="job" required></label>
+    <label>النوع: <input type="text" id="gender" readonly></label>
+
+    <label>المرحلة:
+      <select id="stage" required>
+        <option>الديوان</option>
+        <option>المرحلة الثانوية</option>
+        <option>المرحلة الإبتدائية</option>
+        <option>المرحلة الإعدادية</option>
+        <option>المرحلة الثانوية الفنية</option>
+        <option>تربية خاصة</option>
+      </select>
+    </label>
+
+    <label>تبعية التعليم:
+      <select id="educationType" required>
+        <option>رسمي حكومي</option>
+        <option>رسمي لغات "تجريبي"</option>
+        <option>خاص</option>
+      </select>
+    </label>
+
+    <label>مقر التدريب: <input type="text" id="trainingPlace" placeholder="أونلاين أو مقر التدريب"></label>
+
+    <label>اسم التدريب / الموديول:
+      <select id="module" required>
+        <option>Office365</option>
+        <option>AI</option>
+        <option>Microsoft Excel</option>
+        <option>Microsoft Access</option>
+        <option>Google App</option>
+        <option>Network</option>
+        <option>Microsoft Word</option>
+        <option>Microsoft PowerPoint</option>
+        <option>webex</option>
+        <option>الحوكمة والتحول الرقمي</option>
+        <option>البرمجة المستوى الأول</option>
+        <option>البرمجة المستوى الثاني</option>
+        <option>Microsoft Graphic Designer</option>
+        <option>ريادة أعمال</option>
+        <option>صناعة المحتوى الرقمي</option>
+        <option>AI Advantage</option>
+        <option>Software Maintenance</option>
+        <option>الإدارة المدرسية الفعالة في عصر التحول الرقمي</option>
+        <option>Cyber Security</option>
+        <option>Website Development</option>
+      </select>
+    </label>
+
+    <button type="submit">تسجيل جديد</button>
+  </form>
+
+  <!-- فورم الحضور -->
+  <form id="attendanceForm">
+    <label>اختر تاريخ الحضور:
+      <select id="day" required>
+        <option value="">اختر</option>
+        <option>22-08-2026</option>
+        <option>23-08-2026</option>
+        <option>24-08-2026</option>
+        <option>25-08-2026</option>
+        <option>26-08-2026</option>
+        <option>27-08-2026</option>
+      </select>
+    </label>
+    <button type="submit">تسجيل حضور</button>
+  </form>
+
+  <button onclick="showAttendance()">عرض الحضور</button>
+  <button onclick="exportExcel()">تصدير إلى Excel</button>
+
+  <div id="attendanceTable" style="display:none;">
+    <h3>قائمة الحضور</h3>
+    <table id="tableData">
+      <thead>
+        <tr>
+          <th>المحافظة</th>
+          <th>الإدارة</th>
+          <th>جهة العمل</th>
+          <th>الاسم</th>
+          <th>كود المعلم</th>
+          <th>الرقم القومي</th>
+          <th>البريد الموحد</th>
+          <th>الهاتف</th>
+          <th>الواتساب</th>
+          <th>الوظيفة</th>
+          <th>النوع</th>
+          <th>المرحلة</th>
+          <th>تبعية التعليم</th>
+          <th>مقر التدريب</th>
+          <th>اسم الموديول</th>
+          <th>22-08-2026</th>
+          <th>23-08-2026</th>
+          <th>24-08-2026</th>
+          <th>25-08-2026</th>
+          <th>26-08-2026</th>
+          <th>27-08-2026</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+<script>
+const webAppUrl = "https://script.google.com/macros/s/AKfycbw2_AZ1HGeKE-e37QzIOdiqReqd8xlSZmT4IfsqFGEXgMrw7cBSUEnevilY6FUkzucY/exec"; // ضع رابط السكريبت هنا
+
+function showMessage(msg, type="info"){
+  const div = document.getElementById('message');
+  div.textContent = msg;
+  div.className = type;
+}
+
+function getGenderFromNID(nid){
+  const digit = parseInt(nid.slice(-2,-1));
+  return digit % 2 === 0 ? "أنثى" : "ذكر";
+}
+
+// ✅ البحث والتحقق
+async function checkNID(){
+  const nid = document.getElementById('nidInput').value.trim();
+  if(!nid){
+    showMessage("ادخل الرقم القومي", "error");
+    return;
+  }
+  showMessage("جاري التحقق...", "info");
+  try {
+    const url = `${webAppUrl}?action=check&nid=${encodeURIComponent(nid)}`;
+    const res = await fetch(url);
+    const text = await res.text();
+    if(text.includes("غير مسجل")){
+      showMessage("الرقم القومي غير موجود، برجاء التسجيل أولاً", "error");
+      document.getElementById('registerForm').style.display = 'block';
+      document.getElementById('attendanceForm').style.display = 'none';
+      document.getElementById('gender').value = getGenderFromNID(nid);
+    } else if(text.includes("مسجل بالفعل")){
+      showMessage("الرقم القومي موجود بالفعل، يمكنك تسجيل الحضور", "success");
+      document.getElementById('attendanceForm').style.display = 'block';
+      document.getElementById('registerForm').style.display = 'none';
+    }
+  } catch(err){
+    showMessage("تعذر الاتصال: " + err, "error");
+  }
+}
+
+// ✅ تسجيل جديد
+document.getElementById('registerForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const nid = document.getElementById('nidInputForm').value.trim();
+  const governorate = document.getElementById('governorate').value;
+  const administration = document.getElementById('administration').value;
+  const school = document.getElementById('school').value;
+  const name = document.getElementById('name').value;
+  const code = document.getElementById('code').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const whatsapp = document.getElementById('whatsapp').value;
+  const job = document.getElementById('job').value;
+  const gender = document.getElementById('gender').value;
+  const stage = document.getElementById('stage').value;
+  const educationType = document.getElementById('educationType').value;
+  const trainingPlace = document.getElementById('trainingPlace').value;
+  const module = document.getElementById('module').value;
+
+  showMessage("جاري تسجيل البيانات...", "info");
+
+  const url = `${webAppUrl}?action=register&nid=${encodeURIComponent(nid)}&governorate=${encodeURIComponent(governorate)}&administration=${encodeURIComponent(administration)}&school=${encodeURIComponent(school)}&name=${encodeURIComponent(name)}&code=${encodeURIComponent(code)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&whatsapp=${encodeURIComponent(whatsapp)}&job=${encodeURIComponent(job)}&gender=${encodeURIComponent(gender)}&stage=${encodeURIComponent(stage)}&educationType=${encodeURIComponent(educationType)}&trainingPlace=${encodeURIComponent(trainingPlace)}&module=${encodeURIComponent(module)}`;
+
+  const res = await fetch(url);
+  const text = await res.text();
+  showMessage(text, text.includes("تم") ? "success" : "error");
+
+  // ✅ بعد التسجيل الناجح، نخفي فورم التسجيل ونظهر فورم الحضور مباشرة
+  if(text.includes("تم")){
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('attendanceForm').style.display = 'block';
+    // نخلي الرقم القومي اللي اتسجل يفضل موجود علشان يسجل الحضور
+    document.getElementById('nidInput').value = nid;
+  }
+});
+
+// ✅ تسجيل حضور
+document.getElementById('attendanceForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const nid = document.getElementById('nidInput').value.trim();
+  const day = document.getElementById('day').value;
+
+  showMessage("جاري تسجيل الحضور...", "info");
+
+  const todayStr = new Date().toLocaleDateString('en-GB').split('/').reverse().join('-');
+  if(day !== todayStr){
+    showMessage("مسموح بتسجيل حضور لتاريخ النهاردة فقط ("+todayStr+")", "error");
+    return;
+  }
+
+  const url = `${webAppUrl}?action=attendance&nid=${encodeURIComponent(nid)}&day=${encodeURIComponent(day)}`;
+  const res = await fetch(url);
+  const text = await res.text();
+  showMessage(text, text.includes("تم") ? "success" : "error");
+});
+
+// ✅ عرض الحضور
+async function showAttendance(){
+  const pass = prompt("ادخل كلمة السر لعرض الحضور:");
+  if(pass !== "852456"){
+    showMessage("كلمة السر غير صحيحة", "error");
+    return;
+  }
+  showMessage("جاري تحميل بيانات الحضور...", "info");
+  try {
+    const url = `${webAppUrl}?action=showAll`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const tbody = document.querySelector("#tableData tbody");
+    tbody.innerHTML = "";
+    data.slice(1).forEach(row=>{
+      const tr = document.createElement("tr");
+      row.forEach(cell=>{
+        const td = document.createElement("td");
+        td.textContent = cell;
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+    document.getElementById("attendanceTable").style.display = "block";
+    showMessage("تم عرض بيانات الحضور", "success");
+  } catch(err){
+    showMessage("تعذر تحميل البيانات: " + err, "error");
+  }
+}
+
+// ✅ تصدير إلى Excel
+function exportExcel(){
+  const table = document.getElementById("tableData");
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.table_to_sheet(table);
+  XLSX.utils.book_append_sheet(wb, ws, "Attendance");
+  XLSX.writeFile(wb, "attendance.xlsx");
+}
+</script>
+</body>
+</html>
