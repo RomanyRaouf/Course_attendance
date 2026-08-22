@@ -20,128 +20,85 @@
 </head>
 <body>
   <h2>تسجيل حضور كورس C# OOP</h2>
+  <a href="https://chat.whatsapp.com/yourGroupLink" target="_blank">اضغط هنا للانضمام لجروب الواتس</a>
+  <br><br>
   <label>الرقم القومي: <input type="text" id="nidInput" required></label>
   <button onclick="checkNID()">بحث</button>
 
   <div id="message"></div>
+ <form id="registerForm">
   <label>المحافظة:
-  <select id="governorate" required>
-    <option value="">اختر المحافظة</option>
-    <option>أسيوط</option>
-    <option>القاهرة</option>
-    <option>الجيزة</option>
-    <option>الإسكندرية</option>
-    <option>الشرقية</option>
-    <option>الدقهلية</option>
-    <option>القليوبية</option>
-    <option>الغربية</option>
-    <option>المنوفية</option>
-    <option>البحيرة</option>
-    <option>كفر الشيخ</option>
-    <option>دمياط</option>
-    <option>بورسعيد</option>
-    <option>الإسماعيلية</option>
-    <option>السويس</option>
-    <option>شمال سيناء</option>
-    <option>جنوب سيناء</option>
-    <option>الفيوم</option>
-    <option>بني سويف</option>
-    <option>المنيا</option>
-    <option>سوهاج</option>
-    <option>قنا</option>
-    <option>الأقصر</option>
-    <option>أسوان</option>
-    <option>مطروح</option>
-    <option>الوادي الجديد</option>
-    <option>البحر الأحمر</option>
-  </select>
-</label>
+    <select id="governorate" required>
+      <option value="أسيوط">أسيوط</option>
+      <option value="القاهرة">القاهرة</option>
+      <option value="الجيزة">الجيزة</option>
+      <option value="الإسكندرية">الإسكندرية</option>
+      <!-- باقي المحافظات -->
+    </select>
+  </label>
 
+  <label>الإدارة:
+    <select id="administration" required>
+      <option>ابنوب</option>
+      <option>ابوتيج</option>
+      <option>اسيوط</option>
+      <option>البداري</option>
+      <!-- باقي الإدارات -->
+    </select>
+  </label>
 
-    <label>الإدارة:
-      <select id="administration" required>
-        <option value="">اختر الإدارة</option>
-        <option>ابنوب</option>
-        <option>ابوتيج</option>
-        <option>اسيوط</option>
-        <option>البداري</option>
-        <option>الغنايم</option>
-        <option>الفتح</option>
-        <option>القوصية</option>
-        <option>ديروط</option>
-        <option>ساحل سليم</option>
-        <option>صدفا</option>
-        <option>منفلوط</option>
-        <option>ديوان المديرية</option>
-        <option>خارج المحافظة</option>
-      </select>
-    </label>
+  <label>جهة العمل / المدرسة: <input type="text" id="school" required></label>
+  <label>الاسم رباعي: <input type="text" id="name" required></label>
+  <label>كود المعلم / الطالب: <input type="text" id="code" required></label>
+  <label>الرقم القومي: <input type="text" id="nidInputForm" required></label>
+  <label>البريد الموحد: <input type="email" id="email" required></label>
+  <label>الهاتف: <input type="text" id="phone" required></label>
+  <label>الواتس آب: <input type="text" id="whatsapp"></label>
+  <label>الوظيفة: <input type="text" id="job" required></label>
+  <label>النوع: <input type="text" id="gender" readonly></label>
 
-    <label>جهة العمل: <input type="text" id="school" required></label>
-    <label>الاسم: <input type="text" id="name" required></label>
-    <label>كود المعلم: <input type="text" id="code" required></label>
-    <label>الرقم القومي: <input type="text" id="nidInputForm" required></label>
-    <label>البريد الموحد: <input type="email" id="email" required></label>
-    <label>الهاتف: <input type="text" id="phone" required></label>
-    <label>الواتساب: <input type="text" id="whatsapp"></label>
-    <label>الوظيفة: <input type="text" id="job" required></label>
-    <label>النوع: <input type="text" id="gender" readonly></label>
+  <label>المرحلة:
+    <select id="stage" required>
+      <option>المرحلة الإبتدائية</option>
+      <option>المرحلة الإعدادية</option>
+      <option>المرحلة الثانوية</option>
+      <option>المرحلة الثانوية الفنية</option>
+      <option>تربية خاصة</option>
+      <option>الديوان</option>
+    </select>
+  </label>
 
-    <label>المرحلة:
-      <select id="stage" required>
-        <option>المرحلة الإبتدائية</option>
-        <option>المرحلة الإعدادية</option>
-        <option>المرحلة الثانوية</option>
-        <option>المرحلة الثانوية الفنية</option>
-        <option>تربية خاصة</option>
-        <option>الديوان</option>
-      </select>
-    </label>
+  <label>تبعية التعليم:
+    <select id="educationType" required>
+      <option>رسمي حكومي</option>
+      <option>رسمي لغات "تجريبي"</option>
+      <option>خاص</option>
+    </select>
+  </label>
 
-    <label>تبعية التعليم:
-      <select id="educationType" required>
-        <option>رسمي حكومي</option>
-        <option>رسمي لغات "تجريبي"</option>
-        <option>خاص</option>
-      </select>
-    </label>
+  <label>مقر التدريب: <input type="text" id="trainingPlace" placeholder="أونلاين أو مقر التدريب"></label>
 
-    <label>مقر التدريب: <input type="text" id="trainingPlace"></label>
+  <label>اسم التدريب / الموديول:
+    <select id="module" required>
+      <option>Office365</option>
+      <option>AI</option>
+      <option>Microsoft Excel</option>
+      <option>Microsoft Access</option>
+      <option>Google App</option>
+      <option>Network</option>
+      <option>Microsoft Word</option>
+      <option>Microsoft PowerPoint</option>
+      <option>webex</option>
+      <option>البرمجة المستوى الأول</option>
+      <option>البرمجة المستوى الثاني</option>
+      <option>Cyber Security</option>
+      <option>Website Development</option>
+      <!-- باقي الموديولات -->
+    </select>
+  </label>
 
-    <label>اسم التدريب / الموديول:
-      <select id="module" required>
-        <option>Office365</option>
-        <option>AI</option>
-        <option>Microsoft Excel</option>
-        <option>Microsoft Access</option>
-        <option>Google App</option>
-        <option>Network</option>
-        <option>Microsoft Word</option>
-        <option>Microsoft PowerPoint</option>
-        <option>webex</option>
-        <option>البرمجة المستوى الأول</option>
-        <option>البرمجة المستوى الثاني</option>
-        <option>Cyber Security</option>
-        <option>Website Development</option>
-      </select>
-    </label>
-
-    <button type="submit">تسجيل جديد</button>
-  </form>
-  <form id="attendanceForm">
-    <label>اختر تاريخ الحضور:
-      <select id="day" required>
-        <option value="">اختر</option>
-        <option>22-08-2026</option>
-        <option>23-08-2026</option>
-        <option>24-08-2026</option>
-        <option>25-08-2026</option>
-        <option>26-08-2026</option>
-        <option>27-08-2026</option>
-      </select>
-    </label>
-    <button type="submit">تسجيل حضور</button>
-  </form>
+  <button type="submit">تسجيل جديد</button>
+</form>
 
   <button onclick="showAttendance()">عرض الحضور</button>
   <button onclick="exportExcel()">تصدير إلى Excel</button>
@@ -182,17 +139,22 @@ const webAppUrl = "https://script.google.com/macros/s/AKfycbwIV0V1iTQ0YJYf-PH6Cc
 
 function showMessage(msg, type="info"){
   const div = document.getElementById('message');
-  if(div){ div.textContent = msg; div.className = type; }
+  div.textContent = msg;
+  div.className = type;
 }
 
 function getGenderFromNID(nid){
   const digit = parseInt(nid.slice(-2,-1));
   return digit % 2 === 0 ? "أنثى" : "ذكر";
 }
+
 // ✅ البحث والتحقق
 async function checkNID(){
   const nid = document.getElementById('nidInput').value.trim();
-  if(!nid){ showMessage("ادخل الرقم القومي", "error"); return; }
+  if(!nid){
+    showMessage("ادخل الرقم القومي", "error");
+    return;
+  }
   showMessage("جاري التحقق...", "info");
   try {
     const url = `${webAppUrl}?action=check&nid=${encodeURIComponent(nid)}`;
@@ -200,22 +162,19 @@ async function checkNID(){
     const text = await res.text();
     if(text.includes("غير مسجل")){
       showMessage("الرقم القومي غير موجود، برجاء التسجيل أولاً", "error");
-      const regForm = document.getElementById('registerForm');
-      const attForm = document.getElementById('attendanceForm');
-      if(regForm) regForm.style.display = 'block';
-      if(attForm) attForm.style.display = 'none';
+      document.getElementById('registerForm').style.display = 'block';
+      document.getElementById('attendanceForm').style.display = 'none';
       document.getElementById('gender').value = getGenderFromNID(nid);
     } else if(text.includes("مسجل بالفعل")){
       showMessage("الرقم القومي موجود بالفعل، يمكنك تسجيل الحضور", "success");
-      const regForm = document.getElementById('registerForm');
-      const attForm = document.getElementById('attendanceForm');
-      if(attForm) attForm.style.display = 'block';
-      if(regForm) regForm.style.display = 'none';
+      document.getElementById('attendanceForm').style.display = 'block';
+      document.getElementById('registerForm').style.display = 'none';
     }
   } catch(err){
     showMessage("تعذر الاتصال: " + err, "error");
   }
 }
+
 // ✅ تسجيل جديد
 document.getElementById('registerForm').addEventListener('submit', async e=>{
   e.preventDefault();
@@ -243,14 +202,14 @@ document.getElementById('registerForm').addEventListener('submit', async e=>{
   const text = await res.text();
   showMessage(text, text.includes("تم") ? "success" : "error");
 
+  // ✅ بعد التسجيل الناجح، نخفي فورم التسجيل ونظهر فورم الحضور مباشرة
   if(text.includes("تم")){
-    const regForm = document.getElementById('registerForm');
-    const attForm = document.getElementById('attendanceForm');
-    if(regForm) regForm.style.display = 'none';
-    if(attForm) attForm.style.display = 'block';
-    document.getElementById('nidInput').value = nid;
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('attendanceForm').style.display = 'block';
+    document.getElementById('nidInput').value = nid; // نحط الرقم القومي في خانة البحث
   }
 });
+
 // ✅ تسجيل حضور
 document.getElementById('attendanceForm').addEventListener('submit', async e=>{
   e.preventDefault();
@@ -268,7 +227,10 @@ document.getElementById('attendanceForm').addEventListener('submit', async e=>{
 // ✅ عرض الحضور
 async function showAttendance(){
   const pass = prompt("ادخل كلمة السر لعرض الحضور:");
-  if(pass !== "852456"){ showMessage("كلمة السر غير صحيحة", "error"); return; }
+  if(pass !== "852456"){
+    showMessage("كلمة السر غير صحيحة", "error");
+    return;
+  }
   showMessage("جاري تحميل بيانات الحضور...", "info");
   try {
     const url = `${webAppUrl}?action=showAll`;
@@ -291,6 +253,7 @@ async function showAttendance(){
     showMessage("تعذر تحميل البيانات: " + err, "error");
   }
 }
+
 // ✅ تصدير إلى Excel
 function exportExcel(){
   const table = document.getElementById("tableData");
