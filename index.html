@@ -145,12 +145,11 @@
     </table>
   </div>
 <script>
-const webAppUrl = "https://script.google.com/macros/s/AKfycbwAhLgNRemohgaDJGh2CKYQNpp94d-hreK6UZViNa2CK1ZOjBOXT5j8N3EWMLFdM6ML/exec";
+const webAppUrl = " https://script.google.com/macros/s/AKfycbyGz0WC5_ZiW55CREhJuMysNNa6pmiy9K-DHUdgP4qzmiBjNF-e-3cR48mPAT8BplKr/exec";
 
 function showMessage(msg, type="info"){
   const div = document.getElementById('message');
-  div.textContent = msg;
-  div.className = type;
+  if(div){ div.textContent = msg; div.className = type; }
 }
 
 function getGenderFromNID(nid){
@@ -158,6 +157,7 @@ function getGenderFromNID(nid){
   return digit % 2 === 0 ? "أنثى" : "ذكر";
 }
 
+// ✅ البحث والتحقق
 async function checkNID(){
   const nid = document.getElementById('nidInput').value.trim();
   if(!nid){
@@ -184,11 +184,9 @@ async function checkNID(){
   }
 }
 
-
 // ✅ تسجيل جديد
 document.getElementById('registerForm').addEventListener('submit', async e=>{
   e.preventDefault();
-
   const nid = document.getElementById('nidInputForm').value.trim();
   const governorate = document.getElementById('governorate').value;
   const administration = document.getElementById('administration').value;
@@ -220,25 +218,9 @@ document.getElementById('registerForm').addEventListener('submit', async e=>{
   }
 });
 
-
-  const url = `${webAppUrl}?action=register&nid=${encodeURIComponent(nid)}&governorate=${encodeURIComponent(governorate)}&administration=${encodeURIComponent(administration)}&school=${encodeURIComponent(school)}&name=${encodeURIComponent(name)}&code=${encodeURIComponent(code)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&whatsapp=${encodeURIComponent(whatsapp)}&job=${encodeURIComponent(job)}&gender=${encodeURIComponent(gender)}&stage=${encodeURIComponent(stage)}&educationType=${encodeURIComponent(educationType)}&trainingPlace=${encodeURIComponent(trainingPlace)}&module=${encodeURIComponent(module)}`;
-
-  const res = await fetch(url);
-  const text = await res.text();
-  showMessage(text, text.includes("تم") ? "success" : "error");
-
-  // ✅ بعد التسجيل الناجح، نخفي فورم التسجيل ونظهر فورم الحضور مباشرة
-  if(text.includes("تم")){
-    document.getElementById('registerForm').style.display = 'none';
-    document.getElementById('attendanceForm').style.display = 'block';
-    document.getElementById('nidInput').value = nid; // نحط الرقم القومي في خانة البحث
-  }
-});
-
 // ✅ تسجيل حضور
 document.getElementById('attendanceForm').addEventListener('submit', async e=>{
   e.preventDefault();
-
   const nid = document.getElementById('nidInput').value.trim();
   const day = document.getElementById('day').value;
 
@@ -250,37 +232,42 @@ document.getElementById('attendanceForm').addEventListener('submit', async e=>{
   showMessage(text, text.includes("تم") ? "success" : "error");
 });
 
-  const url = `${webAppUrl}?action=attendance&nid=${encodeURIComponent(nid)}&day=${encodeURIComponent(day)}`;
-  const res = await fetch(url);
-  const text = await res.text();
-  showMessage(text, text.includes("تم") ? "success" : "error");
-});
-
 // ✅ عرض الحضور
 async function showAttendance(){
-  const pass = prompt("ادخل كلمة السر لعرض الحضور:");
-  if(pass !== "852456"){
-    showMessage("كلمة السر غير صحيحة", "error");
-    return;
-  }
-  showMessage("جاري تحميل بيانات الحضور...", "info");
+  showMessage("جاري تحميل البيانات...", "info");
   try {
     const url = `${webAppUrl}?action=showAll`;
     const res = await fetch(url);
     const data = await res.json();
-    const tbody = document.querySelector("#tableData tbody");
+
+    const table = document.getElementById('tableData');
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
+    thead.innerHTML = "";
     tbody.innerHTML = "";
-    data.slice(1).forEach(row=>{
-      const tr = document.createElement("tr");
-      row.forEach(cell=>{
-        const td = document.createElement("td");
-        td.textContent = cell;
-        tr.appendChild(td);
-      });
-      tbody.appendChild(tr);
+
+    // رؤوس الأعمدة
+    const headerRow = document.createElement('tr');
+    data[0].forEach(h=>{
+      const th = document.createElement('th');
+      th.textContent = h;
+      headerRow.appendChild(th);
     });
-    document.getElementById("attendanceTable").style.display = "block";
-    showMessage("تم عرض بيانات الحضور", "success");
+    thead.appendChild(headerRow);
+
+    // البيانات
+    for(let i=1; i<data.length; i++){
+      const row = document.createElement('tr');
+      data[i].forEach(cell=>{
+        const td = document.createElement('td');
+        td.textContent = cell;
+        row.appendChild(td);
+      });
+      tbody.appendChild(row);
+    }
+
+    document.getElementById('attendanceTable').style.display = 'block';
+    showMessage("تم تحميل البيانات", "success");
   } catch(err){
     showMessage("تعذر تحميل البيانات: " + err, "error");
   }
@@ -288,10 +275,8 @@ async function showAttendance(){
 
 // ✅ تصدير إلى Excel
 function exportExcel(){
-  const table = document.getElementById("tableData");
-  const wb = XLSX.utils.book_new();
-  const ws = XLSX.utils.table_to_sheet(table);
-  XLSX.utils.book_append_sheet(wb, ws, "Attendance");
+  const table = document.getElementById('tableData');
+  const wb = XLSX.utils.table_to_book(table, {sheet:"الحضور"});
   XLSX.writeFile(wb, "attendance.xlsx");
 }
 </script>
