@@ -5,7 +5,7 @@
   <title>تسجيل حضور كورس C# OOP</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
-    body {font-family: Cairo; direction: rtl; margin: 20px;}
+    body {font-family: Tahoma; direction: rtl; margin: 20px;}
     label {display: block; margin-top: 10px;}
     input, select {padding: 5px; width: 300px;}
     button {margin-top: 15px; padding: 10px 20px;}
@@ -19,122 +19,31 @@
   </style>
 </head>
 <body>
-
   <h2>تسجيل حضور كورس C# OOP</h2>
-  <a href = "https://chat.whatsapp.com/L7MNkgaSlI227M0Ut5nEGF" target ="_blank">اضغط هنا للانضمام لجروب الواتس</a>
+  <a href="https://chat.whatsapp.com/yourGroupLink" target="_blank">اضغط هنا للانضمام لجروب الواتس</a>
+  <br><br>
   <label>الرقم القومي: <input type="text" id="nidInput" required></label>
   <button onclick="checkNID()">بحث</button>
 
   <div id="message"></div>
-
-  <!-- فورم التسجيل -->
   <form id="registerForm">
-    <label>المحافظة:
-      <select id="governorate" required>
-        <option value="أسيوط">أسيوط</option>
-        <option value="القاهرة">القاهرة</option>
-        <option value="الجيزة">الجيزة</option>
-        <option value="الإسكندرية">الإسكندرية</option>
-        <option value="سوهاج">سوهاج</option>
-        <option value="قنا">قنا</option>
-        <option value="المنيا">المنيا</option>
-        <option value="بني سويف">بني سويف</option>
-        <option value="أسوان">أسوان</option>
-        <option value="مطروح">مطروح</option>
-        <option value="البحر الأحمر">البحر الأحمر</option>
-        <option value="الوادي الجديد">الوادي الجديد</option>
-        <option value="دمياط">دمياط</option>
-        <option value="بورسعيد">بورسعيد</option>
-        <option value="الإسماعيلية">الإسماعيلية</option>
-        <option value="السويس">السويس</option>
-        <option value="الشرقية">الشرقية</option>
-        <option value="الغربية">الغربية</option>
-        <option value="الدقهلية">الدقهلية</option>
-        <option value="كفر الشيخ">كفر الشيخ</option>
-        <option value="الفيوم">الفيوم</option>
-        <option value="شمال سيناء">شمال سيناء</option>
-        <option value="جنوب سيناء">جنوب سيناء</option>
-      </select>
-    </label>
-
-    <label>الإدارة:
-      <select id="administration" required>
-        <option>ابنوب</option>
-        <option>ابوتيج</option>
-        <option>اسيوط</option>
-        <option>البداري</option>
-        <option>الغنايم</option>
-        <option>الفتح</option>
-        <option>القوصية</option>
-        <option>ديروط</option>
-        <option>ساحل سليم</option>
-        <option>صدفا</option>
-        <option>منفلوط</option>
-        <option>ديوان المديرية</option>
-        <option>خارج المحافظة</option>
-      </select>
-    </label>
-
-    <label>جهة العمل / المدرسة: <input type="text" id="school" required></label>
-    <label>الاسم رباعي: <input type="text" id="name" required></label>
-    <label>كود المعلم / الطالب: <input type="text" id="code" required></label>
+    <label>المحافظة: <input type="text" id="governorate" required></label>
+    <label>الإدارة: <input type="text" id="administration" required></label>
+    <label>جهة العمل: <input type="text" id="school" required></label>
+    <label>الاسم: <input type="text" id="name" required></label>
+    <label>كود المعلم: <input type="text" id="code" required></label>
     <label>الرقم القومي: <input type="text" id="nidInputForm" required></label>
     <label>البريد الموحد: <input type="email" id="email" required></label>
     <label>الهاتف: <input type="text" id="phone" required></label>
-    <label>الواتس آب: <input type="text" id="whatsapp"></label>
+    <label>الواتساب: <input type="text" id="whatsapp"></label>
     <label>الوظيفة: <input type="text" id="job" required></label>
     <label>النوع: <input type="text" id="gender" readonly></label>
-
-    <label>المرحلة:
-      <select id="stage" required>
-        <option>الديوان</option>
-        <option>المرحلة الثانوية</option>
-        <option>المرحلة الإبتدائية</option>
-        <option>المرحلة الإعدادية</option>
-        <option>المرحلة الثانوية الفنية</option>
-        <option>تربية خاصة</option>
-      </select>
-    </label>
-
-    <label>تبعية التعليم:
-      <select id="educationType" required>
-        <option>رسمي حكومي</option>
-        <option>رسمي لغات "تجريبي"</option>
-        <option>خاص</option>
-      </select>
-    </label>
-
-    <label>مقر التدريب: <input type="text" id="trainingPlace" placeholder="أونلاين أو مقر التدريب"></label>
-
-    <label>اسم التدريب / الموديول:
-      <select id="module" required>
-        <option>Office365</option>
-        <option>AI</option>
-        <option>Microsoft Excel</option>
-        <option>Microsoft Access</option>
-        <option>Google App</option>
-        <option>Network</option>
-        <option>Microsoft Word</option>
-        <option>Microsoft PowerPoint</option>
-        <option>webex</option>
-        <option>الحوكمة والتحول الرقمي</option>
-        <option>البرمجة المستوى الأول</option>
-        <option>البرمجة المستوى الثاني</option>
-        <option>Microsoft Graphic Designer</option>
-        <option>ريادة أعمال</option>
-        <option>صناعة المحتوى الرقمي</option>
-        <option>AI Advantage</option>
-        <option>Software Maintenance</option>
-        <option>الإدارة المدرسية الفعالة في عصر التحول الرقمي</option>
-        <option>Cyber Security</option>
-        <option>Website Development</option>
-      </select>
-    </label>
-
+    <label>المرحلة: <input type="text" id="stage" required></label>
+    <label>تبعية التعليم: <input type="text" id="educationType" required></label>
+    <label>مقر التدريب: <input type="text" id="trainingPlace"></label>
+    <label>اسم الموديول: <input type="text" id="module" required></label>
     <button type="submit">تسجيل جديد</button>
   </form>
-
-  <!-- فورم الحضور -->
   <form id="attendanceForm">
     <label>اختر تاريخ الحضور:
       <select id="day" required>
@@ -152,12 +61,12 @@
 
   <button onclick="showAttendance()">عرض الحضور</button>
   <button onclick="exportExcel()">تصدير إلى Excel</button>
-
   <div id="attendanceTable" style="display:none;">
     <h3>قائمة الحضور</h3>
     <table id="tableData">
       <thead>
         <tr>
+          <th>تاريخ التسجيل</th>
           <th>المحافظة</th>
           <th>الإدارة</th>
           <th>جهة العمل</th>
@@ -185,7 +94,7 @@
     </table>
   </div>
 <script>
-const webAppUrl = "https://script.google.com/macros/s/AKfycbw2_AZ1HGeKE-e37QzIOdiqReqd8xlSZmT4IfsqFGEXgMrw7cBSUEnevilY6FUkzucY/exec"; // ضع رابط السكريبت هنا
+const webAppUrl = "https://script.google.com/macros/s/AKfycbwIV0V1iTQ0YJYf-PH6CcLpPj_dVd9wjYsA5t80ioj7uLsXazrl_pJ9xxF_0iHp1KZE/exec";
 
 function showMessage(msg, type="info"){
   const div = document.getElementById('message');
@@ -256,8 +165,7 @@ document.getElementById('registerForm').addEventListener('submit', async e=>{
   if(text.includes("تم")){
     document.getElementById('registerForm').style.display = 'none';
     document.getElementById('attendanceForm').style.display = 'block';
-    // نخلي الرقم القومي اللي اتسجل يفضل موجود علشان يسجل الحضور
-    document.getElementById('nidInput').value = nid;
+    document.getElementById('nidInput').value = nid; // نحط الرقم القومي في خانة البحث
   }
 });
 
@@ -268,12 +176,6 @@ document.getElementById('attendanceForm').addEventListener('submit', async e=>{
   const day = document.getElementById('day').value;
 
   showMessage("جاري تسجيل الحضور...", "info");
-
-  const todayStr = new Date().toLocaleDateString('en-GB').split('/').reverse().join('-');
-  if(day !== todayStr){
-    showMessage("مسموح بتسجيل حضور لتاريخ النهاردة فقط ("+todayStr+")", "error");
-    return;
-  }
 
   const url = `${webAppUrl}?action=attendance&nid=${encodeURIComponent(nid)}&day=${encodeURIComponent(day)}`;
   const res = await fetch(url);
