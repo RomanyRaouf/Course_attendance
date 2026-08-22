@@ -170,16 +170,23 @@ async function checkNID(){
     const url = `${webAppUrl}?action=check&nid=${encodeURIComponent(nid)}`;
     const res = await fetch(url);
     const text = await res.text();
+
     if(text.includes("غير مسجل")){
       showMessage("الرقم القومي غير موجود، برجاء التسجيل أولاً", "error");
-      document.getElementById('registerForm').style.display = 'block';
-      document.getElementById('attendanceForm').style.display = 'none';
+      const regForm = document.getElementById('registerForm');
+      const attForm = document.getElementById('attendanceForm');
+      if(regForm) regForm.style.display = 'block';
+      if(attForm) attForm.style.display = 'none';
       document.getElementById('gender').value = getGenderFromNID(nid);
+
     } else if(text.includes("مسجل بالفعل")){
       showMessage("الرقم القومي موجود بالفعل، يمكنك تسجيل الحضور", "success");
-      document.getElementById('attendanceForm').style.display = 'block';
-      document.getElementById('registerForm').style.display = 'none';
+      const regForm = document.getElementById('registerForm');
+      const attForm = document.getElementById('attendanceForm');
+      if(attForm) attForm.style.display = 'block';
+      if(regForm) regForm.style.display = 'none';
     }
+
   } catch(err){
     showMessage("تعذر الاتصال: " + err, "error");
   }
