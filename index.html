@@ -27,37 +27,78 @@
 
   <div id="message"></div>
   <form id="registerForm">
-    <label>المحافظة: <input type="text" id="governorate" required></label>
-    <label>الإدارة: <input type="text" id="administration" required></label>
-    <label>جهة العمل: <input type="text" id="school" required></label>
-    <label>الاسم: <input type="text" id="name" required></label>
-    <label>كود المعلم: <input type="text" id="code" required></label>
-    <label>الرقم القومي: <input type="text" id="nidInputForm" required></label>
-    <label>البريد الموحد: <input type="email" id="email" required></label>
-    <label>الهاتف: <input type="text" id="phone" required></label>
-    <label>الواتساب: <input type="text" id="whatsapp"></label>
-    <label>الوظيفة: <input type="text" id="job" required></label>
-    <label>النوع: <input type="text" id="gender" readonly></label>
-    <label>المرحلة: <input type="text" id="stage" required></label>
-    <label>تبعية التعليم: <input type="text" id="educationType" required></label>
-    <label>مقر التدريب: <input type="text" id="trainingPlace"></label>
-    <label>اسم الموديول: <input type="text" id="module" required></label>
-    <button type="submit">تسجيل جديد</button>
-  </form>
-  <form id="attendanceForm">
-    <label>اختر تاريخ الحضور:
-      <select id="day" required>
-        <option value="">اختر</option>
-        <option>22-08-2026</option>
-        <option>23-08-2026</option>
-        <option>24-08-2026</option>
-        <option>25-08-2026</option>
-        <option>26-08-2026</option>
-        <option>27-08-2026</option>
-      </select>
-    </label>
-    <button type="submit">تسجيل حضور</button>
-  </form>
+  <label>المحافظة:
+    <select id="governorate" required>
+      <option value="أسيوط">أسيوط</option>
+      <option value="القاهرة">القاهرة</option>
+      <option value="الجيزة">الجيزة</option>
+      <option value="الإسكندرية">الإسكندرية</option>
+      <!-- باقي المحافظات -->
+    </select>
+  </label>
+
+  <label>الإدارة:
+    <select id="administration" required>
+      <option>ابنوب</option>
+      <option>ابوتيج</option>
+      <option>اسيوط</option>
+      <option>البداري</option>
+      <!-- باقي الإدارات -->
+    </select>
+  </label>
+
+  <label>جهة العمل / المدرسة: <input type="text" id="school" required></label>
+  <label>الاسم رباعي: <input type="text" id="name" required></label>
+  <label>كود المعلم / الطالب: <input type="text" id="code" required></label>
+  <label>الرقم القومي: <input type="text" id="nidInputForm" required></label>
+  <label>البريد الموحد: <input type="email" id="email" required></label>
+  <label>الهاتف: <input type="text" id="phone" required></label>
+  <label>الواتس آب: <input type="text" id="whatsapp"></label>
+  <label>الوظيفة: <input type="text" id="job" required></label>
+  <label>النوع: <input type="text" id="gender" readonly></label>
+
+  <label>المرحلة:
+    <select id="stage" required>
+      <option>المرحلة الإبتدائية</option>
+      <option>المرحلة الإعدادية</option>
+      <option>المرحلة الثانوية</option>
+      <option>المرحلة الثانوية الفنية</option>
+      <option>تربية خاصة</option>
+      <option>الديوان</option>
+    </select>
+  </label>
+
+  <label>تبعية التعليم:
+    <select id="educationType" required>
+      <option>رسمي حكومي</option>
+      <option>رسمي لغات "تجريبي"</option>
+      <option>خاص</option>
+    </select>
+  </label>
+
+  <label>مقر التدريب: <input type="text" id="trainingPlace" placeholder="أونلاين أو مقر التدريب"></label>
+
+  <label>اسم التدريب / الموديول:
+    <select id="module" required>
+       <option>البرمجة المستوى الأول</option>
+      <option>البرمجة المستوى الثاني</option>
+      <option>Office365</option>
+      <option>AI</option>
+      <option>Microsoft Excel</option>
+      <option>Microsoft Access</option>
+      <option>Google App</option>
+      <option>Network</option>
+      <option>Microsoft Word</option>
+      <option>Microsoft PowerPoint</option>
+      <option>webex</option>
+      <option>Cyber Security</option>
+      <option>Website Development</option>
+      <!-- باقي الموديولات -->
+    </select>
+  </label>
+
+  <button type="submit">تسجيل جديد</button>
+</form>
 
   <button onclick="showAttendance()">عرض الحضور</button>
   <button onclick="exportExcel()">تصدير إلى Excel</button>
