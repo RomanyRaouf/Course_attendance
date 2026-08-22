@@ -195,6 +195,7 @@ async function checkNID(){
 // ✅ تسجيل جديد
 document.getElementById('registerForm').addEventListener('submit', async e=>{
   e.preventDefault();
+
   const nid = document.getElementById('nidInputForm').value.trim();
   const governorate = document.getElementById('governorate').value;
   const administration = document.getElementById('administration').value;
@@ -219,6 +220,20 @@ document.getElementById('registerForm').addEventListener('submit', async e=>{
   const text = await res.text();
   showMessage(text, text.includes("تم") ? "success" : "error");
 
+  if(text.includes("تم")){
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('attendanceForm').style.display = 'block';
+    document.getElementById('nidInput').value = nid;
+  }
+});
+
+
+  const url = `${webAppUrl}?action=register&nid=${encodeURIComponent(nid)}&governorate=${encodeURIComponent(governorate)}&administration=${encodeURIComponent(administration)}&school=${encodeURIComponent(school)}&name=${encodeURIComponent(name)}&code=${encodeURIComponent(code)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&whatsapp=${encodeURIComponent(whatsapp)}&job=${encodeURIComponent(job)}&gender=${encodeURIComponent(gender)}&stage=${encodeURIComponent(stage)}&educationType=${encodeURIComponent(educationType)}&trainingPlace=${encodeURIComponent(trainingPlace)}&module=${encodeURIComponent(module)}`;
+
+  const res = await fetch(url);
+  const text = await res.text();
+  showMessage(text, text.includes("تم") ? "success" : "error");
+
   // ✅ بعد التسجيل الناجح، نخفي فورم التسجيل ونظهر فورم الحضور مباشرة
   if(text.includes("تم")){
     document.getElementById('registerForm').style.display = 'none';
@@ -230,10 +245,17 @@ document.getElementById('registerForm').addEventListener('submit', async e=>{
 // ✅ تسجيل حضور
 document.getElementById('attendanceForm').addEventListener('submit', async e=>{
   e.preventDefault();
+
   const nid = document.getElementById('nidInput').value.trim();
   const day = document.getElementById('day').value;
 
   showMessage("جاري تسجيل الحضور...", "info");
+
+  const url = `${webAppUrl}?action=attendance&nid=${encodeURIComponent(nid)}&day=${encodeURIComponent(day)}`;
+  const res = await fetch(url);
+  const text = await res.text();
+  showMessage(text, text.includes("تم") ? "success" : "error");
+});
 
   const url = `${webAppUrl}?action=attendance&nid=${encodeURIComponent(nid)}&day=${encodeURIComponent(day)}`;
   const res = await fetch(url);
